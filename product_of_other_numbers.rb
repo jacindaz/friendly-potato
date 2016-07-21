@@ -2,24 +2,13 @@ def product_of_other_numbers(numbers)
   array_length = numbers.length
   result = []
 
-  # brute force approach
   numbers.each_with_index do |number, index|
-    # index goes from 0 - 3
-
-    # (5..10).inject { |sum, n| sum + n }            #=> 45
-    # (5..10).reduce(1, :*)                          #=> 151200
-    # (5..10).inject(1) { |product, n| product * n } #=> 151200
-
-    # new_product = numbers.reduce(1) do |multiply, n|
-    #   next if n == (index + 1)
-    #   multiply * numbers[index + n]
-    # end
-
-    # test_array.reduce { |product, n| puts "\nproduct: #{product}, n: #{n}"; n== 7 ? product * 1 : product * n }
-
     new_product = numbers.reduce do |product, n|
-      # puts "\nproduct: #{product}, n: #{n}"
-      n == number ? product * 1 : product * n
+      if n == number || n == 0
+        product * 1
+      else
+        product * n
+      end
     end
 
     result << new_product
@@ -44,7 +33,7 @@ end
 
 # run your function through some test cases here
 # remember: debugging is half the battle!
-test_array = [1, 7, 3, 4]
+test_array = [1, 7, 3, 4, 0]
 puts "#{product_of_other_numbers(test_array)}"
 
 # your function would return:
