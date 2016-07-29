@@ -1,29 +1,10 @@
-def product_of_other_numbers(numbers)
-  array_length = numbers.length
-  result = []
-
-  numbers.each_with_index do |number, index|
-    new_product = numbers.reduce do |product, n|
-      if n == number || n == 0
-        product * 1
-      else
-        product * n
-      end
-    end
-
-    result << new_product
-  end
-
-  # test_array = [1, 7, 3, 4]
-  # length: 4, index: 0 - 3
-  # num of #'s to multiply: 3
-  # 1 (index 0): 7*3*4 (index 1 * index 2 * index 3)
-  # 7 (index 1): 1*3*4 (index 0 * index 2 * index 3)
-  # 3 (index 2): 1*7*4 (index 0 * index 1 * index 3)
-  # 4 (index 3): 1*7*3 (index 0 * index 1 * index 2)
-
-  result
-end
+# test_array = [1, 7, 3, 4]
+# length: 4, index: 0 - 3
+# num of #'s to multiply: 3
+# 1 (index 0): 7*3*4 (index 1 * index 2 * index 3)
+# 7 (index 1): 1*3*4 (index 0 * index 2 * index 3)
+# 3 (index 2): 1*7*4 (index 0 * index 1 * index 3)
+# 4 (index 3): 1*7*3 (index 0 * index 1 * index 2)
 
 # first pass
 # 1: 7*3*4
@@ -39,12 +20,49 @@ end
 
 def better_product_of_other_numbers(numbers_array)
   array_length = numbers_array.length
+  result = []
 
   numbers_array.each_with_index do |number, index|
-    numbers_array[index] = multiply_factorial(array_length, numbers_array, index)
+    result << multiply_factorial(array_length, numbers_array, index)
+
+    puts "\n==========="
+    puts "index: #{index}" 
+    puts "array_length: #{array_length}"
+    puts "number: #{number}"
+    puts "numbers_array: #{numbers_array}\n"
+
+    puts "resulting array: #{result}"
+    puts "===========\n"
+  end
+
+  result.each_with_index do |number, index|
+    new_number = multiply_reverse_factorial(array_length, numbers_array, index)
+    result[index] *= new_number
+
+    puts "\n==========="
+    puts "INSIDE RESULT LOOP"
+    puts "index: #{index}" 
+    puts "array_length: #{array_length}"
+    puts "new_number: #{new_number}"
+    puts "numbers_array: #{numbers_array}\n"
+
+    puts "resulting array: #{result}"
+    puts "===========\n"
   end
 
   numbers_array
+end
+
+def multiply_reverse_factorial(array_length, numbers_array, index)
+  incrementer = index - 1
+  new_number = 1
+
+  while incrementer > array_length do
+    new_number *= numbers_array[incrementer]
+    incrementer -= 1
+  end
+
+  new_number
 end
 
 def multiply_factorial(array_length, numbers_array, index)
@@ -60,14 +78,7 @@ def multiply_factorial(array_length, numbers_array, index)
 end
 
 def print_debugging_message
-  puts "\n==========="
-  puts "index: #{index}" 
-  puts "array_length: #{array_length}"
-  puts "number: #{number}"
-  puts "numbers_array: #{numbers_array}\n"
-
-  puts "resulting array: #{result}"
-  puts "===========\n"
+  
 end
 
 # ASSETS
@@ -80,6 +91,7 @@ end
 # run your function through some test cases here
 # remember: debugging is half the battle!
 test_array = [1, 7, 3, 4]
+better_product_of_other_numbers(test_array)
 # puts "#{better_product_of_other_numbers(test_array)}"
 
 # your function would return:
