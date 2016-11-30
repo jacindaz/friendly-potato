@@ -1,39 +1,27 @@
-def max_profit(stock_prices)
-  min_price = stock_prices[0]
-  max_profit = stock_prices[1] - min_price
-  num_prices = stock_prices.length
+p = [10, 7, 5, 8, 11, 9]
+poop = [100, 50, 0, -50]
+blah = [99, 119, 50, 120, 20]
 
-  stock_prices.each_with_index do |price, index|
-    price_one = stock_prices[index]
-    price_two = nil
+def max_profit(yesterday_stock_prices, max_profit = 0)
+  return max_profit if yesterday_stock_prices.length == 1
 
-    if index == (num_prices - 1)
-      puts "\n==============="
-      puts "price: #{price}, index: #{index}, num_prices: #{num_prices}"
-      puts "price_one: #{price_one}, price_two: #{price_two}"
-      puts "min_price: #{min_price}"
-      puts "===============\n"
-      return max_profit
+  buy_price = yesterday_stock_prices[0]
+  unless buy_price == yesterday_stock_prices[-1]
+    yesterday_stock_prices[1..-1].each do |sell_price|
+      profit = sell_price - buy_price
+      max_profit = profit if profit > max_profit
+
+      # puts "\n=============="
+      # puts "buy_price: #{buy_price}, sell_price: #{sell_price}"
+      # puts "yesterday_stock_prices: #{yesterday_stock_prices}"
+      # puts "profit: #{profit}, max_profit: #{max_profit}"
+      # puts "==============\n"
     end
-
-    price_two = stock_prices[index + 1] unless index == (num_prices - 1)
-    min_price = [price_one, min_price].min
-
-    max_profit = [max_profit, price - min_price].max
   end
 
-  highest_profit
+  max_profit(yesterday_stock_prices[1..-1], max_profit)
 end
 
-def generate_random_list_of_numbers(min, max, length)
-  length.times.map{ min + Random.rand(max - min) }
-end
-
-
-stock_prices_yesterday = [10, 7, 5, 8, 11, 9]
-lots_oh_prices = generate_random_list_of_numbers(1, 65, 100)
-going_down = [100, 90, 84, 83, 82]
-
-puts "lots_oh_prices: #{lots_oh_prices}"
-puts "\nmax profit: #{max_profit(lots_oh_prices)}"
-
+puts "result: #{max_profit(blah)}, array: #{blah}"
+puts "result: #{max_profit(poop)}, array: #{poop}"
+puts "result: #{max_profit(p)}, array: #{p}"
