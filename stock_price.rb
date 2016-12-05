@@ -2,7 +2,7 @@ profit_six = [10, 7, 5, 8, 11, 9]
 negative_profit = [100, 50, 0, -50]
 profit_seventy = [99, 119, 50, 120, 20]
 
-def max_profit(yesterday_stock_prices, max_profit = nil)
+def max_profit_recursive(yesterday_stock_prices, max_profit = nil)
   max_profit = yesterday_stock_prices[1] - yesterday_stock_prices[0] if max_profit.nil?
   return max_profit if yesterday_stock_prices.length == 1
 
@@ -24,9 +24,9 @@ def max_profit(yesterday_stock_prices, max_profit = nil)
     end
   end
 
-  max_profit(yesterday_stock_prices[1..-1], max_profit)
+  max_profit_recursive(yesterday_stock_prices[1..-1], max_profit)
 end
 
-puts "result: #{max_profit(profit_seventy)}, array: #{profit_seventy}"
-puts "result: #{max_profit(negative_profit)}, array: #{negative_profit}"
-puts "result: #{max_profit(profit_six)}, array: #{profit_six}"
+puts "result: #{max_profit_recursive(profit_seventy)}, array: #{profit_seventy}"
+puts "result: #{max_profit_recursive(negative_profit)}, array: #{negative_profit}"
+puts "result: #{max_profit_recursive(profit_six)}, array: #{profit_six}"
