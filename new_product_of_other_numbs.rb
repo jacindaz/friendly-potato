@@ -6,13 +6,17 @@ def product_of_other_numbers(numbers)
   multiply_all_nums = 1
 
   numbers.each do |num|
-    multiply_all_nums *= num
+    unless num == 0
+      multiply_all_nums *= num
+    end
   end
 
   puts "multiply_all_nums: #{multiply_all_nums}"
 
   numbers.each_with_index do |num, index|
-    numbers[index] = (multiply_all_nums / num)
+    unless num == 0
+      numbers[index] = (multiply_all_nums / num)
+    end
   end
 
   puts "numbers: #{numbers}"
