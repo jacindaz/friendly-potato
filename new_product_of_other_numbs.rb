@@ -2,24 +2,21 @@ length_four = [1, 7, 3, 4]
 length_five = [1, 7, 3, 4, 2]
 length_six = [1, 7, 3, 4, 2, 8]
 
+# brute force approach
 def product_of_other_numbers(numbers)
-  multiply_all_nums = 1
+  products = []
+  array_length = numbers.length
+  reusable_number_one = numbers[2..(array_length - 1)].reduce(:*)
+  reusable_number_two = numbers[0..(array_length - 3)].reduce(:*)
 
-  numbers.each do |num|
-    unless num == 0
-      multiply_all_nums *= num
-    end
-  end
-
-  puts "multiply_all_nums: #{multiply_all_nums}"
+  puts "\n================="
+  puts "reusable_number_one: #{reusable_number_one}"
+  puts "reusable_number_two: #{reusable_number_two}"
+  puts "=================\n"
 
   numbers.each_with_index do |num, index|
-    unless num == 0
-      numbers[index] = (multiply_all_nums / num)
-    end
-  end
 
-  puts "numbers: #{numbers}"
+  end
 end
 
 product_of_other_numbers(length_four)
