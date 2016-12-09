@@ -21,22 +21,28 @@ def product_of_other_numbers(numbers):
 
         num_is_before = True
         before_product = 1
+        after_product = 1
 
         for num in numbers:
             if current_number == num:
                 num_is_before = False
-                reusable_components[num]['before'] = before_product
-                print("current_number: %d" % current_number)
-                print("num: %d" % num)
-                print("reusable_components: %s" % reusable_components)
+                reusable_components[current_number]['before'] = before_product
+                print("current_number: %d, num: %d" % (current_number, num))
+                print("before, reusable_components: %s" % reusable_components)
                 print("\n")
             elif num_is_before:
                 before_product *= num
+            elif num_is_before == False:
+                after_product *= num
+
+            if num == numbers[-1]:
+                reusable_components[current_number]['after'] = after_product
+
+                print("current_number: %d, num: %d" % (current_number, num))
+                print("after, reusable_components: %s" % reusable_components)
+                print("\n")
 
             product *= num
-
-        if current_number == 1:
-            reusable_components[current_number]['after']
 
         products.append(product)
 
