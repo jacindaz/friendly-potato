@@ -22,9 +22,7 @@ def product_of_other_numbers(numbers):
         current_number_orig_array = numbers[current_index]
         current_number_products = products_of_all_ints_before_index[current_index]
 
-        if current_number_orig_array != numbers[-1]:
-            products_of_all_ints_before_index[current_index] = current_number_products * product_so_far_after
-
+        products_of_all_ints_before_index[current_index] = current_number_products * product_so_far_after
         product_so_far_after *= current_number_orig_array
         current_index -= 1
 
