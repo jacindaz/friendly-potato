@@ -2,10 +2,34 @@
 # The input numbers_of_ints will always have at least three integers.
 
 # test cases
-one = [5, 10, 3, 12]
+one = [5, 10, 3, 12, 5]
 two = [1, 2, 3, 4, 5]
 three = [5, 4, 3, 2, 1]
 negatives = [-10, -10, 1, 3, 2]
+
+def new_high_product(numbers):
+    biggest = 1
+    second_biggest = 1
+    biggest_negative = -1
+    second_biggest_negative = -1
+
+    high_product_so_far = 1
+
+    for number in numbers:
+        if number >= biggest:
+            second_biggest = biggest
+            biggest = number
+        if abs(number) >= abs(biggest_negative):
+            second_biggest_negative = biggest_negative
+            biggest_negative = number
+
+            print("\ncurrent number: %s" % number)
+            print("biggest: %s, second_biggest: %s" % (biggest, second_biggest))
+            print("biggest_negative: %s, second_biggest_negative: %s" % (biggest_negative, second_biggest_negative))
+
+new_high_product(one)
+
+
 
 def highest_product(numbers):
     print("\n===============")
@@ -66,7 +90,7 @@ def highest_product(numbers):
 
     return product
 
-highest_product(one)
+# highest_product(one)
 # highest_product(two)
 # highest_product(three)
-highest_product(negatives)
+# highest_product(negatives)
