@@ -6,28 +6,61 @@ one = [5, 10, 3, 12, 5]
 two = [1, 2, 3, 4, 5]
 three = [5, 4, 3, 2, 1]
 negatives = [-10, -10, 1, 3, 2]
+more_negs = [-10, -8, 9, 2, 10]
 
 def new_high_product(numbers):
-    biggest = 1
-    second_biggest = 1
-    biggest_negative = -1
-    second_biggest_negative = -1
+    biggest = None
+    second_biggest = None
+
+    biggest_negative = None
+    second_biggest_negative = None
 
     high_product_so_far = 1
 
     for number in numbers:
-        if number >= biggest:
+
+        if biggest == None and number > 0:
+            biggest = number
+        elif number >= biggest and number > 0:
             second_biggest = biggest
             biggest = number
-        if abs(number) >= abs(biggest_negative):
+        elif number < biggest and number > 0 and (second_biggest == None or number > second_biggest):
+            second_biggest = number
+
+        if biggest_negative == None and number < 0:
+            biggest_negative = number
+        elif number < 0 and number <= biggest_negative:
             second_biggest_negative = biggest_negative
             biggest_negative = number
+        elif number < 0 and number > biggest_negative and second_biggest_negative == None:
+            second_biggest_negative = number
+        elif number < 0 and number > biggest_negative and number < second_biggest_negative: # number -7, second_big_neg -8. number > second_big_neg
+            second_biggest_negative = number
 
-            print("\ncurrent number: %s" % number)
-            print("biggest: %s, second_biggest: %s" % (biggest, second_biggest))
-            print("biggest_negative: %s, second_biggest_negative: %s" % (biggest_negative, second_biggest_negative))
+        # print("\ncurrent number: %s" % number)
+        # print("biggest: %s, second_biggest: %s" % (biggest, second_biggest))
+        # print("biggest_negative: %s, second_biggest_negative: %s" % (biggest_negative, second_biggest_negative))
 
-new_high_product(one)
+    # positives_product = biggest * second_biggest
+    # negatives_product = biggest_negative * second_biggest_negative
+    # if positives_product > negatives_product:
+    #     high_product_so_far = positives_product
+    # elif negatives_product > positives_product:
+    #     high_product_so_far = negatives_product
+
+
+    print("\noriginal array: %s" % numbers)
+    print("biggest: %s, second_biggest: %s" % (biggest, second_biggest))
+    print("biggest_negative: %s, second_biggest_negative: %s" % (biggest_negative, second_biggest_negative))
+
+# doesn't work
+new_high_product(three)
+new_high_product(negatives)
+new_high_product(more_negs)
+
+# works
+# new_high_product(one)
+# new_high_product(two)
 
 
 
