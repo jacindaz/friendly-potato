@@ -10,7 +10,7 @@ def merge_ranges(meetings):
 
 
         for merged_index, merged_toople in enumerate(merged_meetings):
-            # if current_toople == (4, 8):
+            # if current_toople == (2, 3):
             #     pdb.set_trace()
             # merged_index == [0]
             # current_toople (150, 170)
@@ -62,8 +62,16 @@ def merge_ranges(meetings):
 
                 # [(0, 1), (3, 5)]
                 # merge (4, 8) => [(0, 1), (3, 8)]
-                elif merged_index == last_index(merged_meetings) and current_toople[0] >= merged_toople[0] and current_toople[0] < merged_toople[1] and current_toople[1] > merged_toople[1]:
-                    merged_meetings[merged_index] = (merged_toople[0], current_toople[1])
+                #
+                # [(2, 3)]
+                # merge in (1, 2) => [(1, 3)]
+                elif merged_index == last_index(merged_meetings) and (current_toople[1] == merged_toople[0] or current_toople[0] == merged_toople[1]):
+                    # [(1, 2), (2, 3)]
+                    # [(2, 3), (1, 2)]
+                    max_toople = max([current_toople, merged_toople])
+                    min_toople = min([current_toople, merged_toople])
+
+                    merged_meetings[merged_index] = (min_toople[0], max_toople[1])
                     break
 
                 elif current_toople[0] <= merged_toople[0] and current_toople[1] < merged_toople[1]:
@@ -93,4 +101,11 @@ ranges = [(0, 1), (3, 5), (4, 8), (10, 12), (9, 10)]
 # merge_ranges(ranges)
 
 ranges2 = [(100, 120), (150, 170), (75, 110), (110, 112), (0, 20), (115, 125), (50, 130)]
-merge_ranges(ranges2)
+# merge_ranges(ranges2)
+
+r = [(2, 3), (1, 2)]
+r2 = [(1, 2), (2, 3)]
+r3 = [(1, 5), (2, 3)]
+r4 = [(1, 10), (2, 6), (3, 5), (7, 9)]
+
+merge_ranges(r4)
